@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 if(isset($_POST)){
     
     
@@ -25,7 +27,7 @@ if(isset($_POST)){
         $errores['apellido']="el apellido no es valido";
     }
     
-    if(!empty($email)&&!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    if(!empty($email)&&filter_var($email, FILTER_VALIDATE_EMAIL)){
         $email_valido = true;
     }else{
         $apellido_valido = false;
@@ -43,7 +45,8 @@ if(isset($_POST)){
         //insertar usuario en BD
         
     }else{
-        
+        $_SESSION['errores'] = $errores;
+        header('Location: index.php');
     }
     
 
