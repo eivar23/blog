@@ -2,6 +2,12 @@
 
 <!-- barra lateral -->
         <aside id="sidebar">
+            
+            <?php if(isset($_SESSION['usuario'])):?>
+             <div id="usuario-logueado" class="bloque">
+                 <h3> Bienvenido, <?=$_SESSION['usuario']['nombre'].' '.$_SESSION['usuario']['apellidos'] ?></h3>
+             </div>
+            <?php endif; ?>
             <div id="login" class="bloque">
                 <h3>Inicia sesión</h3>
                 <form action="login.php" method="post">
