@@ -6,10 +6,22 @@
             <?php if(isset($_SESSION['usuario'])):?>
              <div id="usuario-logueado" class="bloque">
                  <h3> Bienvenido, <?=$_SESSION['usuario']['nombre'].' '.$_SESSION['usuario']['apellidos'] ?></h3>
+                 <!--botones-->
+                 <a class="boton btn-verde" href="cerrar.php" >crear entrada</a>
+                 <a class="boton btn-naranja" href="cerrar.php" >mis datos</a>
+                 <a class="boton" href="cerrar.php" >cerrar sesión</a>
              </div>
             <?php endif; ?>
+            
             <div id="login" class="bloque">
                 <h3>Inicia sesión</h3>
+                
+                <?php if(isset($_SESSION['error_login'])):?>
+                <div class="alerta alerta-error">
+                    <?=$_SESSION['error_login'];?>
+                </div>
+               <?php endif; ?>
+                
                 <form action="login.php" method="post">
                     <label for="email">Email</label>
                     <input type="email" name="email">
