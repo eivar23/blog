@@ -8,12 +8,12 @@
                  <h3> Bienvenido, <?=$_SESSION['usuario']['nombre'].' '.$_SESSION['usuario']['apellidos'] ?></h3>
                  <!--botones-->
                  <a class="boton btn-verde" href="cerrar.php" >crear entrada</a>
-                 <a class="boton" href="cerrar.php" >crear categoria</a>
+                 <a class="boton" href="crear-categoria.php" >crear categoria</a>
                  <a class="boton btn-naranja" href="cerrar.php" >mis datos</a>
                  <a class="boton btn-rojo" href="cerrar.php" >cerrar sesión</a>
              </div>
             <?php endif; ?>
-            
+            <?php if(!isset($_SESSION['usuario'])):?>
             <div id="login" class="bloque">
                 <h3>Inicia sesión</h3>
                 
@@ -72,4 +72,5 @@
                 </form>
                   <?php borrarErrores(); ?>
             </div>
+            <?php endif; ?>
         </aside>
