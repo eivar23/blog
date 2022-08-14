@@ -1,3 +1,5 @@
+
+
 <?php require_once 'includes/header.php'; ?>
 
 <?php require_once 'includes/lateral.php'; ?>
@@ -6,11 +8,11 @@
         
         <!-- caja principal -->
         <div id="principal">
-            <h1>Últimas entradas</h1>
+            <h1>Todas las entradas</h1>
             
             
             <?php
-                $entradas = obtenerEntradas($db, true);
+                $entradas = obtenerEntradas($db);
                 if(!empty($entradas)):
                     while($entrada = mysqli_fetch_assoc($entradas)):               
             ?>
@@ -31,9 +33,7 @@
              ?>
             
            
-            <div id="ver-todas">
-                 <a href="entradas.php">ver todas las entradas</a>
-             </div>
+           
            
         </div>
         

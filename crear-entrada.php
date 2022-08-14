@@ -18,15 +18,15 @@
         
         <label for="categoria">Nombre de la categoría</label>
         <select name="categoria">
-            <?php $categorias= obtenerCategoprias($db);
+            <?php $categorias= obtenerCategorias($db);
             if(!empty($categorias)):
                  while($categoria = mysqli_fetch_assoc($categorias)):
-            
-             
             ?>
+            
             <option value="<?= $categoria['id']?>">
                 <?= $categoria['nombre']?>
             </option>
+            
             <?php
                 endwhile;
             endif;

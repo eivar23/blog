@@ -28,7 +28,7 @@ function borrarErrores(){
     return $borrado;
 }
 
-function obtenerCategoprias($conexion){
+function obtenerCategorias($conexion){
     $sql = "SELECT * FROM categorias ORDER BY id ASC;";
     $categorias = mysqli_query($conexion, $sql);
     
@@ -39,10 +39,15 @@ function obtenerCategoprias($conexion){
     return $result;
 }
 
-function obtenerEntradas($conexion){
+
+
+function obtenerEntradas($conexion, $limit = null){
     $sql = "SELECT e.*, c.nombre AS 'categoria' FROM entradas e ".
             "INNER JOIN categorias c ON e.categoria_id = c.id ".
-            "ORDER BY e.id DESC LIMIT 4";
+            "ORDER BY e.id DESC ";
+    if($limit){
+        $sql .= "LIMIT 4";
+    }
     $entradas = mysqli_query($conexion, $sql);
     
     $result  = array();
