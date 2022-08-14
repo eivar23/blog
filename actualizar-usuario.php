@@ -36,33 +36,44 @@ if(isset($_POST)){
     $guardar_usuario = false;
       
     if(count($errores)== 0){
+        $usuario = $_SESSION['usuario'];
         $guardar_usuario =true;
         
+        //Comprobar si email ya existe
+        $sql = "SELECT id, email FROM usuarios WHERE email = '$email'";
+        $isset_email = mysqli_query($db, $sql);
+        $isset_user = mysqli_fetch_assoc($isset_email);
+        
+        
+        if($isset_user['id'] == $usuario['id'] || empty($isset_user)){
         //Actualzar usuario en BD
-        $usuario = $_SESSION['usuario'];
-        
-        $sql = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellido', email = '$email' WHERE id =".$usuario['id'];
-        
-        $guardar = mysqli_query($db, $sql);
-        
-        echo "run way but we're running in circles";
-         
-        if($guardar){
-            $_SESSION['usuario']['nombre'] = $nombre;
-            $_SESSION['usuario']['apellidos'] = $apellido;
-            $_SESSION['usuario']['email'] = $email;
-            
-            $_SESSION['completado'] = "Tus datos se han actualizado con éxito";
-        }else{
-            $_SESSION['errores']['general'] = "fallo la actualización de datos";
-            
-        }
-        
-    }else{
-        $_SESSION['errores'] = $errores;
+       
 
+            $sql = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellido', email = '$email' WHERE id =".$usuario['id'];
+
+            $guardar = mysqli_query($db, $sql);
+
+
+            if($guardar){
+                $_SESSION['usuario']['nombre'] = $nombre;
+                $_SESSION['usuario']['apellidos'] = $apellido;
+                $_SESSION['usuario']['email'] = $email;
+
+                $_SESSION['completado'] = "Tus datos se han actualizado con éxito";
+            }else{
+                $_SESSION['errores']['general'] = "fallo la actualización de datos";
+
+            }
+        }else{
+             $_SESSION['errores']['general'] = "El usuario ya existe";
+        }
+    }else{
+    
+        $_SESSION['errores'] = $errores;
     }
- }
+
+}
+    
 header('Location: mis-datos.php');
 
 ?>

@@ -7,7 +7,8 @@
 <div id ="principal">
     <h1>Modificar mis datos</h1>
         <form action="actualizar-usuario.php" method="post">
-                    
+            
+             <?php echo isset($_SESSION['errores'])? mostrarError($_SESSION['errores'],'general'):''; ?>
             <label for="name">Nombre</label>
             <input type="text" name="name" value="<?= $_SESSION['usuario']['nombre'] ?>">
             <?php echo isset($_SESSION['errores'])? mostrarError($_SESSION['errores'],'nombre'):''; ?>
